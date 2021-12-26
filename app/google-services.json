@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "793458948274",
+    "firebase_url": "https://phase-1-19a07.firebaseio.com",
+    "project_id": "phase-1-19a07",
+    "storage_bucket": "phase-1-19a07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793458948274:android:f6fb199c2652b9a93cf1ab",
+        "android_client_info": {
+          "package_name": "com.example.ambulanceemergencyresponsesystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793458948274-jnvmibbsd3973doc7n5m4kp62v838j4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0nZdvQQq0dwHq3BEq_w7E5G1IMHxz0i0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793458948274-jnvmibbsd3973doc7n5m4kp62v838j4s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

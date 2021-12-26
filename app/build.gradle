@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.example.ambulanceemergencyresponsesystem"
+        minSdk 22
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
+
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
+
+    implementation 'com.google.android.gms:play-services-base:18.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+
+
+    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+    implementation 'com.google.maps:google-maps-services:1.0.1'
+    implementation 'org.slf4j:slf4j-simple:1.7.25'
+    // Utilities for Maps SDK for Android (requires Google Play Services)
+    implementation 'com.google.maps.android:android-maps-utils:2.3.0'
+
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
+    implementation 'com.firebase:geofire-android:3.1.0'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+    testImplementation 'junit:junit:'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+apply plugin: 'com.google.gms.google-services'
+

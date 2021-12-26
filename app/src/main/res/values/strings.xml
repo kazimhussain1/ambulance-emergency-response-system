@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ambulance Emergency Response System</string>
+    <string name="title_activity_user_maps">user_maps</string>
+    <string name="title_activity_maps">Maps</string>
+</resources>
