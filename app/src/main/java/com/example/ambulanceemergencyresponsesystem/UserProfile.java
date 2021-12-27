@@ -1,13 +1,12 @@
 package com.example.ambulanceemergencyresponsesystem;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ambulanceemergencyresponsesystem.databinding.ActivityUserProfileBinding;
 import com.example.ambulanceemergencyresponsesystem.entities.User;
@@ -16,12 +15,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 public class UserProfile extends AppCompatActivity {
 
@@ -49,16 +45,14 @@ public class UserProfile extends AppCompatActivity {
 
             User user = new User(name, email, phone, address);
 
-            FirebaseDatabase.getInstance().getReference("Users")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    binding.progressbar.progressbarContainer.setVisibility(View.GONE);
-                    binding.fullName.setText(user.username);
+            FirebaseFirestore.getInstance().collection("users")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .set(user,SetOptions.merge())
+                    .addOnCompleteListener(task -> {
+                        binding.progressbar.progressbarContainer.setVisibility(View.GONE);
+                        binding.fullName.setText(user.username);
 
-                }
-            });
+                    });
 
         });
 
@@ -73,11 +67,11 @@ public class UserProfile extends AppCompatActivity {
         mAuth.addAuthStateListener(firebaseAuth -> {
             user = firebaseAuth.getCurrentUser();
             if (user != null) {
-                FirebaseDatabase.getInstance().getReference("Users")
-                        .child(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                FirebaseFirestore.getInstance().collection("user")
+                        .document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        User userData = task.getResult().getValue(User.class);
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        User userData = task.getResult().toObject(User.class);
                         if (userData != null) {
 
                             binding.fullName.setText(userData.username);
@@ -87,8 +81,6 @@ public class UserProfile extends AppCompatActivity {
                             binding.editTextAddress.setText(userData.address, TextView.BufferType.EDITABLE);
                             binding.progressbar.progressbarContainer.setVisibility(View.GONE);
                         }
-
-
                     }
                 });
             } else {
