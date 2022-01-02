@@ -39,7 +39,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -68,7 +68,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -179,6 +179,11 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnGoogle"
             app:layout_constraintTop_toTopOf="@+id/btnGoogle" />
+
+        <include android:id="@+id/progress"
+            layout="@layout/progress_overlay"
+            android:visibility="gone"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

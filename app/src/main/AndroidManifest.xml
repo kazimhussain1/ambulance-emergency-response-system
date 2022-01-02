@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AmbulanceEmergencyResponseSystem">
         <activity
-            android:name=".DashboardActivity"
+            android:name=".users.CreateUserActivity"
+            android:exported="true" />
+        <activity
+            android:name=".users.UserListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".dashboard.DashboardActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AmbulanceEmergencyResponseSystem.NoActionBar" />
@@ -26,7 +32,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".UserMaps"
+            android:name=".usermaps.UserMapActivity"
             android:exported="false"
             android:label="@string/title_activity_user_maps" />
         <activity
@@ -41,16 +47,13 @@
             android:name=".ForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".Home"
-            android:exported="false" />
-        <activity
             android:name=".Login"
             android:exported="true" />
         <activity
             android:name=".Registration"
             android:exported="true" />
         <activity
-            android:name=".Roles"
+            android:name=".RolesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

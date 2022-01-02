@@ -2,10 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <FrameLayout
-        android:id="@+id/progressbar_container"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorDarkOverlay">
+        android:background="@color/colorDarkOverlay"
+        android:elevation="@dimen/dimen_main"
+        android:clickable="true"
+        android:focusable="true"
+        >
 
         <ProgressBar
             android:layout_width="wrap_content"

@@ -12,13 +12,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ambulanceemergencyresponsesystem.entities.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
 
     private TextView btnRegister;
-    private EditText txtUsername, txtEmail, txtPassword, txtConPass;
+    private EditText txtUsername, txtEmail, txtPassword, txtPhone;
 
     private FirebaseAuth mAuth;
     private Object user;
@@ -37,7 +38,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         txtUsername = (EditText) findViewById(R.id.inputUsername);
         txtEmail = (EditText) findViewById(R.id.inputEmail);
         txtPassword = (EditText) findViewById(R.id.inputPassword);
-        txtConPass = (EditText) findViewById(R.id.inputConPass);
+        txtPhone = (EditText) findViewById(R.id.inputPhone);
 
 
         db = FirebaseFirestore.getInstance();
@@ -66,7 +67,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         String username = txtUsername.getText().toString().trim();
         String email = txtEmail.getText().toString().trim();
         String password = txtPassword.getText().toString().trim();
-        String conpass = txtConPass.getText().toString().trim();
+        String phn = txtPhone.getText().toString().trim();
 
         if (username.isEmpty()) {
             txtUsername.setError("UserName is required");
@@ -97,14 +98,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
 
 
-        if (conpass.isEmpty()) {
-            txtConPass.setError("Confirm Password is required");
-            txtConPass.requestFocus();
-            return;
-        }
-        if (conpass.length() < 6) {
-            txtConPass.setError("Confirm Password should not be less than 6 characters");
-            txtConPass.requestFocus();
+        if (phn.isEmpty()) {
+            txtPhone.setError("Phone Number Required ");
+            txtPhone.requestFocus();
             return;
         }
 
@@ -112,9 +108,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        user us = new user(FirebaseAuth.getInstance().getCurrentUser().getUid(), username, email);
+                        User us = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(), username, email, phn);
 
-                        db.collection("users").add(us)
+
+                        db.collection("users").document(us.uid).set(us)
 
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
